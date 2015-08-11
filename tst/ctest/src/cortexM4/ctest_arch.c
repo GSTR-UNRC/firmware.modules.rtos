@@ -1,11 +1,5 @@
-/********************************************************
- * DO NOT CHANGE THIS FILE, IT IS GENERATED AUTOMATICALY*
- ********************************************************/
-
-/* Copyright 2008, 2009 Mariano Cerdeiro
- * Copyright 2014, ACSE & CADIEEL
- *      ACSE: http://www.sase.com.ar/asociacion-civil-sistemas-embebidos/ciaa/
- *      CADIEEL: http://www.cadieel.org.ar
+/* Copyright 2015, Mariano Cerdeiro
+ * All rights reserved.
  *
  * This file is part of CIAA Firmware.
  *
@@ -37,21 +31,16 @@
  *
  */
 
-#ifndef _OS_INTERNAL_ARCH_CFG_H_
-#define _OS_INTERNAL_ARCH_CFG_H_
-/** \brief FreeOSEK Os Generated Internal Architecture Configuration Header File
+/** \brief FreeOSEK Os Conformance Test
  **
- ** This file content the internal generated architecture dependent
- ** configuration of FreeOSEK Os.
- **
- ** \file Os_Internal_Arch_Cfg.h
+ ** \file FreeOSEK/Os/tst/ctest/inc/posix/ctest_arch.h
  **/
 
 /** \addtogroup FreeOSEK
  ** @{ */
 /** \addtogroup FreeOSEK_Os
  ** @{ */
-/** \addtogroup FreeOSEK_Os_Internal
+/** \addtogroup FreeOSEK_Os_CT Conformance Test
  ** @{ */
 
 /*
@@ -63,44 +52,42 @@
 /*
  * modification history (new versions first)
  * -----------------------------------------------------------
- * 20090719 v0.1.1 MaCe rename file to Os_
- * 20080713 v0.1.0 MaCe initial version
  */
 
 /*==================[inclusions]=============================================*/
-
-/*==================[macros]=================================================*/
-#define INTERRUPTS_COUNT      32
-
-/*==================[typedef]================================================*/
-/** \brief Task Context Type */
-#if ( CPUTYPE == ia64 )
-typedef struct {
-   uint64 tss_rsp;
-   uint64 tss_rbp;
-   uint64 tss_rip;
-} TaskContextType;
-#elif ( CPUTYPE == ia32 )
-typedef struct {
-   uint32 tss_esp;
-   uint32 tss_ebp;
-   uint32 tss_eip;
-} TaskContextType;
+#include "ciaaPlatforms.h"
+#include "ctest_arch.h"
+#if (CPU == lpc4337)
+#include "chip.h"
 #endif
 
-/** \brief Task Context Type */
-typedef TaskContextType* TaskContextRefType;
+/*==================[macros and definitions]=================================*/
 
-/** \brief InterruptType Type definition */
-typedef void (*InterruptType)(void);
+/*==================[internal data declaration]==============================*/
 
-/*==================[external data declaration]==============================*/
-extern InterruptType InterruptTable[INTERRUPTS_COUNT];
+/*==================[internal functions declaration]=========================*/
 
-/*==================[external functions declaration]=========================*/
+/*==================[internal data definition]===============================*/
+
+/*==================[external data definition]===============================*/
+#if (CPUTYPE == lpc43xx)
+extern void TriggerISR2_Arch(void)
+{
+   NVIC_SetPendingIRQ(32);
+}
+
+/* Use GPIO1, IRQ33 as interrupt for tests */
+extern void TriggerISR1_Arch(void)
+{
+   NVIC_SetPendingIRQ(33);
+}
+#endif
+
+/*==================[internal functions definition]==========================*/
+
+/*==================[external functions definition]==========================*/
 
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
 /*==================[end of file]============================================*/
-#endif /* #ifndef _OS_INTERNAL_ARCH_CFG_H_ */

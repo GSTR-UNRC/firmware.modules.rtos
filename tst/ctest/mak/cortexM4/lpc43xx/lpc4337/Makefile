@@ -1,10 +1,6 @@
 ###############################################################################
 #
-# Copyright 2014, 2015, Mariano Cerdeiro
-# Copyright 2014, ACSE, CADIEEL
-#    ACSE   : http://www.sase.com.ar/asociacion-civil-sistemas-embebidos/ciaa/
-#    CADIEEL: http://www.cadieel.org.ar
-# All rights reserved.
+# Copyright 2015, Juan Cecconi (UTN-FRBA)
 #
 # This file is part of CIAA Firmware.
 #
@@ -35,34 +31,5 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ###############################################################################
-# library
-LIBS 				     += rtos
-# version
-rtos_VERSION		   = 1.0.1
-# library path
-rtos_PATH 		   	= $(ROOT_DIR)$(DS)modules$(DS)rtos
-# library source path
-rtos_SRC_PATH 	      = $(rtos_PATH)$(DS)src
-# library include path
-rtos_INC_PATH 	      = $(rtos_PATH)$(DS)inc								\
-	$(rtos_PATH)$(DS)inc$(DS)$(ARCH)										\
-	$(rtos_PATH)$(DS)inc$(DS)$(ARCH)$(DS)$(CPUTYPE)							\
-	$(GEN_DIR)$(DS)inc														\
-	$(GEN_DIR)$(DS)inc$(DS)$(ARCH)											\
-	$(GEN_DIR)$(DS)inc$(DS)$(ARCH)$(DS)$(CPUTYPE)
-# library source files
-rtos_SRC_FILES 	      = $(wildcard $(rtos_SRC_PATH)$(DS)*.c)				\
-						$(wildcard $(rtos_SRC_PATH)$(DS)$(ARCH)$(DS)*.c)	\
-						$(wildcard $(rtos_SRC_PATH)$(DS)$(ARCH)$(DS)*.s)	\
-						$(wildcard out$(DS)gen$(DS)src$(DS)*.c)				\
-						$(wildcard out$(DS)gen$(DS)src$(DS)$(ARCH)$(DS)*.c)
-# include needed makefiles depending on the architecture
--include modules$(DS)rtos$(DS)mak$(DS)$(ARCH)$(DS)Makefile
-# files to be generated for ciaa RTOS OSEK
-rtos_GEN_FILES += $(rtos_PATH)$(DS)gen$(DS)inc$(DS)Os_Internal_Cfg.h.php	\
-	$(rtos_PATH)$(DS)gen$(DS)inc$(DS)Os_Cfg.h.php							\
-	$(rtos_PATH)$(DS)gen$(DS)src$(DS)Os_Cfg.c.php							\
-	$(rtos_PATH)$(DS)gen$(DS)src$(DS)Os_Internal_Cfg.c.php					\
-	$(rtos_PATH)$(DS)gen$(DS)src$(DS)$(ARCH)$(DS)Os_Internal_Arch_Cfg.c.php \
-	$(rtos_PATH)$(DS)gen$(DS)inc$(DS)$(ARCH)$(DS)Os_Internal_Arch_Cfg.h.php
+#
 

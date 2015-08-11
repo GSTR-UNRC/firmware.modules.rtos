@@ -1,8 +1,7 @@
 target remote localhost:3333
-monitor reset halt
 load
 break ConfTestFinish
-monitor reset
+continue
 dump value out/rtos/TestResults.bin TestResults
 dump value out/rtos/TestResultsOk.bin TestResultsOk
 dump value out/rtos/SequenceCounter.bin SequenceCounter
